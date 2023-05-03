@@ -35,7 +35,7 @@ public class SawMovement : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col){
 
-        if(col.gameObject.name == "Border"){
+        if(col.gameObject.name == "Tilemap_Ground"){
             
             switch(direction){
             case "up":
