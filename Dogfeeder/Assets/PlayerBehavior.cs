@@ -10,6 +10,7 @@ public class PlayerBehavior : MonoBehaviour
     bool hasBone = false;
     public TextMesh Instruction;
 
+
     // Update is called once per frame
     void Update()
     {
@@ -38,7 +39,15 @@ public class PlayerBehavior : MonoBehaviour
         }
 
         if(col.gameObject.name == "Saw"){
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            PlayerDied();
+        }
+
+        if(col.gameObject.name == "Trap"){
+            PlayerDied();
+        }
+
+        if(col.gameObject.name == "Teleport"){
+            transform.position = col.gameObject.GetComponent<TeleportBehaviour>().GetDestination().position;
         }
 
         
@@ -47,5 +56,10 @@ public class PlayerBehavior : MonoBehaviour
     public void NextLevel(){
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void PlayerDied(){
+        FindObjectOfType<AudioManager>().Play("death");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
